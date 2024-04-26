@@ -3,6 +3,7 @@ import 'package:news_app_kalpas/core/wrappers/remote_services_wrapper.dart';
 import 'package:news_app_kalpas/features/home/data/mappers/news_data_mapper.dart';
 import 'package:news_app_kalpas/features/home/data/repository/home_repository_impl.dart';
 import 'package:news_app_kalpas/features/home/domain/repository/home_repository.dart';
+import 'package:news_app_kalpas/features/home/domain/usecase/fetch_news_usecase.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -18,4 +19,7 @@ Future<void> initDependencies() async {
 
   // mapper
   serviceLocator.registerFactory(() => NewsDataMapper());
+
+  // Usecases
+  serviceLocator.registerFactory(() => FetchNewsUsecase(serviceLocator()));
 }
