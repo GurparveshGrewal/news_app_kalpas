@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_kalpas/core/commons/custom_button.dart';
-import 'package:news_app_kalpas/core/wrappers/remote_services_wrapper.dart';
-import 'package:news_app_kalpas/init_dependencies.dart';
+import 'package:news_app_kalpas/core/commons/widgets/loader.dart';
+import 'package:news_app_kalpas/core/utils/show_snackbar.dart';
+import 'package:news_app_kalpas/features/home/views/bloc/home_bloc.dart';
 
 class AllNewsPage extends StatefulWidget {
   const AllNewsPage({super.key});
@@ -11,23 +13,45 @@ class AllNewsPage extends StatefulWidget {
 }
 
 class _AllNewsPageState extends State<AllNewsPage> {
-  final RemoteServicesWrapper _servicesWrapper =
-      serviceLocator<RemoteServicesWrapper>();
-
-  void getNews() async {
-    await _servicesWrapper.getNews();
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(HomeFetchNewsEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            const Text('All News'),
-            CustomButton(onTap: getNews, title: 'get News'),
-          ],
-        ),
+      body: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state) {
+          if (state is HomeNewsFetchFailureState) {
+            showSnackBar(
+              context,
+              'Something went wrong',
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is HomeLoadingState) return const Loader();
+
+          if (state is HomeNewsFetchSuccessState) {
+            return Center(
+              child: Text(
+                state.articles.length.toString(),
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            );
+          }
+
+          return Center(
+            child: Column(
+              children: [
+                const Text('All News'),
+                CustomButton(onTap: () {}, title: 'get News'),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
