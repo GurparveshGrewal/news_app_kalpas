@@ -1,9 +1,9 @@
 class NewsDataEntity {
-  final String author;
   final String title;
   final String description;
   final DateTime publishedAt;
   final String content;
+  final String? author;
   final String? imageURL;
 
   NewsDataEntity({

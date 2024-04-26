@@ -4,6 +4,7 @@ import 'package:news_app_kalpas/features/home/data/mappers/news_data_mapper.dart
 import 'package:news_app_kalpas/features/home/data/repository/home_repository_impl.dart';
 import 'package:news_app_kalpas/features/home/domain/repository/home_repository.dart';
 import 'package:news_app_kalpas/features/home/domain/usecase/fetch_news_usecase.dart';
+import 'package:news_app_kalpas/features/home/views/bloc/home_bloc.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -16,6 +17,10 @@ Future<void> initDependencies() async {
         serviceLocator(),
         serviceLocator(),
       ));
+
+  // Blocs
+  serviceLocator.registerLazySingleton(
+      () => HomeBloc(fetchNewsUsecase: serviceLocator()));
 
   // mapper
   serviceLocator.registerFactory(() => NewsDataMapper());
