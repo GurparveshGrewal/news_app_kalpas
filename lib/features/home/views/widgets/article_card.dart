@@ -2,14 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_kalpas/core/commons/custom_button.dart';
 import 'package:news_app_kalpas/core/utils/functions.dart';
+import 'package:news_app_kalpas/core/utils/show_snackbar.dart';
 import 'package:news_app_kalpas/features/home/domain/entity/news_entity.dart';
+import 'package:news_app_kalpas/features/home/views/bloc/home_bloc.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsDataEntity newsData;
+  final bool isFromFavsPage;
   const NewsCard({
     required this.newsData,
+    this.isFromFavsPage = false,
     super.key,
   });
 
@@ -19,12 +24,13 @@ class NewsCard extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Dismissible(
       key: UniqueKey(),
-      direction: DismissDirection.endToStart,
+      direction:
+          isFromFavsPage ? DismissDirection.none : DismissDirection.endToStart,
       dragStartBehavior: DragStartBehavior.start,
       confirmDismiss: (_) async {
         final confirmed = await showDialog(
           context: context,
-          builder: (context) {
+          builder: (ctx) {
             return AlertDialog(
               title: const Text(
                 'Add Article to Favorites',
@@ -44,7 +50,6 @@ class NewsCard extends StatelessWidget {
                     Expanded(
                       child: TextButton(
                         onPressed: () {
-                          // Dismiss the dialog and return false
                           Navigator.of(context).pop(false);
                         },
                         child: Text(
@@ -57,7 +62,14 @@ class NewsCard extends StatelessWidget {
                     Expanded(
                       child: CustomButton(
                         title: 'Add to Favs',
-                        onTap: () => Navigator.of(context).pop(false),
+                        onTap: () {
+                          context
+                              .read<HomeBloc>()
+                              .add(HomeAddNewsToFavsEvent(newsData));
+                          showSnackBar(context,
+                              'Successfully added article to the Favorites');
+                          Navigator.of(context).pop(false);
+                        },
                       ),
                     )
                   ],
