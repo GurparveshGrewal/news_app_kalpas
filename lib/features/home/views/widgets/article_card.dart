@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_kalpas/core/commons/custom_button.dart';
 import 'package:news_app_kalpas/core/utils/functions.dart';
+import 'package:news_app_kalpas/core/utils/show_snackbar.dart';
 import 'package:news_app_kalpas/features/home/domain/entity/news_entity.dart';
 import 'package:news_app_kalpas/features/home/views/bloc/home_bloc.dart';
 
@@ -62,6 +63,8 @@ class NewsCard extends StatelessWidget {
                           context
                               .read<HomeBloc>()
                               .add(HomeAddNewsToFavsEvent(newsData));
+                          showSnackBar(context,
+                              'Successfully added article to the Favorites');
                           Navigator.of(context).pop(false);
                         },
                       ),
