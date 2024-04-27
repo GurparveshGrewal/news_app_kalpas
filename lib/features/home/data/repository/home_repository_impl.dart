@@ -44,4 +44,9 @@ class HomeRepositoryImpl extends HomeRepository {
   Future<List<NewsDataEntity>> getFavoriteArticles() async {
     return _favNewsArticles;
   }
+
+  @override
+  void addToFavoriteArticles(NewsDataEntity news) {
+    _favNewsArticles.add(news);
+  }
 }
