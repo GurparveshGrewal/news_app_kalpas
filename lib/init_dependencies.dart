@@ -20,8 +20,10 @@ Future<void> initDependencies() async {
       ));
 
   // Blocs
-  serviceLocator.registerLazySingleton(
-      () => HomeBloc(fetchNewsUsecase: serviceLocator()));
+  serviceLocator.registerLazySingleton(() => HomeBloc(
+        fetchNewsUsecase: serviceLocator(),
+        addNewsToFavsUsecase: serviceLocator(),
+      ));
 
   // mapper
   serviceLocator.registerFactory(() => NewsDataMapper());

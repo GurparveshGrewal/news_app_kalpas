@@ -18,3 +18,5 @@ class HomeNewsFetchFailureState extends HomeState {
 
   HomeNewsFetchFailureState(this.errorMessage);
 }
+
+class HomeAddNewsToFavsSuccessState extends HomeState {}
