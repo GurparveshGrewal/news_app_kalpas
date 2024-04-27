@@ -14,7 +14,6 @@ class HomeRepositoryImpl extends HomeRepository {
   );
 
   final List<NewsDataEntity> _allNewsArticles = [];
-  final List<NewsDataEntity> _favNewsArticles = [];
 
   @override
   Future<List<NewsDataEntity>> getNewsArticles() async {
@@ -42,13 +41,15 @@ class HomeRepositoryImpl extends HomeRepository {
 
   @override
   Future<List<NewsDataEntity>> getFavoriteArticles() async {
-    return _favNewsArticles;
+    return _allNewsArticles
+        .where((article) => article.isFavorite == true)
+        .toList();
   }
 
   @override
   void addToFavoriteArticles(NewsDataEntity news) {
-    if (!_favNewsArticles.contains(news)) {
-      _favNewsArticles.add(news);
-    }
+    int index = _allNewsArticles.indexOf(news);
+    final updatedNews = news.copyWith(isFavoriteArticle: true);
+    _allNewsArticles[index] = updatedNews;
   }
 }

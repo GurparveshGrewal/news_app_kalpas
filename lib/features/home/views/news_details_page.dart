@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app_kalpas/core/utils/functions.dart';
 import 'package:news_app_kalpas/features/home/domain/entity/news_entity.dart';
@@ -126,6 +127,15 @@ class NewsDetailsPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                if (newsData.isFavorite)
+                  Positioned(
+                      top: MediaQuery.of(context).size.height * 0.005,
+                      right: 20,
+                      child: const Icon(
+                        CupertinoIcons.heart_fill,
+                        color: Colors.red,
+                        size: 30,
+                      )),
               ],
             ),
           ),

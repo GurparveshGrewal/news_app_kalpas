@@ -10,6 +10,7 @@ class NewsDataMapper {
 
   NewsDataEntity map(Map<String, dynamic> data) {
     return NewsDataEntity(
+      isFavorite: false,
       author: data[_keyNameAuthor] ?? '',
       title: data[_keyNameTitle] ?? 'No Title',
       description: data[_keyNameDescription] ?? 'No Description Available',
