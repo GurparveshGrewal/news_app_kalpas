@@ -47,7 +47,7 @@ class HomeRepositoryImpl extends HomeRepository {
 
   @override
   void addToFavoriteArticles(NewsDataEntity news) {
-    if (_favNewsArticles.contains(news)) {
+    if (!_favNewsArticles.contains(news)) {
       _favNewsArticles.add(news);
     }
   }

@@ -19,4 +19,16 @@ class HomeNewsFetchFailureState extends HomeState {
   HomeNewsFetchFailureState(this.errorMessage);
 }
 
+class HomeFavNewsFetchSuccessState extends HomeState {
+  final List<NewsDataEntity> articles;
+
+  HomeFavNewsFetchSuccessState(this.articles);
+}
+
+class HomeFavNewsFetchFailureState extends HomeState {
+  final String errorMessage;
+
+  HomeFavNewsFetchFailureState(this.errorMessage);
+}
+
 class HomeAddNewsToFavsSuccessState extends HomeState {}
