@@ -10,11 +10,11 @@ class NewsDataMapper {
 
   NewsDataEntity map(Map<String, dynamic> data) {
     return NewsDataEntity(
-      author: data[_keyNameAuthor],
-      title: data[_keyNameTitle],
-      description: data[_keyNameDescription],
+      author: data[_keyNameAuthor] ?? '',
+      title: data[_keyNameTitle] ?? 'No Title',
+      description: data[_keyNameDescription] ?? 'No Description Available',
       publishedAt: DateTime.parse(data[_keyNamePublishedAt]),
-      content: data[_keyNameContent],
+      content: data[_keyNameContent] ?? 'No Content available',
       imageURL: data[_keyNameUrlToImage],
     );
   }

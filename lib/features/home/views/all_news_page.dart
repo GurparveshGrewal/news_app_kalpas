@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_kalpas/core/commons/custom_button.dart';
 import 'package:news_app_kalpas/core/commons/widgets/loader.dart';
 import 'package:news_app_kalpas/core/utils/show_snackbar.dart';
 import 'package:news_app_kalpas/features/home/views/bloc/home_bloc.dart';
+import 'package:news_app_kalpas/features/home/views/widgets/article_card.dart';
 
 class AllNewsPage extends StatefulWidget {
   const AllNewsPage({super.key});
@@ -35,21 +35,21 @@ class _AllNewsPageState extends State<AllNewsPage> {
           if (state is HomeLoadingState) return const Loader();
 
           if (state is HomeNewsFetchSuccessState) {
-            return Center(
-              child: Text(
-                state.articles.length.toString(),
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: ListView.builder(
+                  itemCount: state.articles.length,
+                  itemBuilder: (ctx, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: NewsCard(newsData: state.articles[index]),
+                    );
+                  }),
             );
           }
 
-          return Center(
-            child: Column(
-              children: [
-                const Text('All News'),
-                CustomButton(onTap: () {}, title: 'get News'),
-              ],
-            ),
+          return const Center(
+            child: Text("We are fetching latest articles"),
           );
         },
       ),

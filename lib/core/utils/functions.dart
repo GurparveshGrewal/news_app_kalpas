@@ -11,5 +11,5 @@ T convertStringToEnum<T>(Iterable<T> values, String? value) =>
     );
 
 String convertDateToReadable(DateTime timestamp) {
-  return DateFormat.yMMMMd().format(timestamp);
+  return DateFormat('E dd MMM yyyy HH:mm \'GMT\'').format(timestamp);
 }
