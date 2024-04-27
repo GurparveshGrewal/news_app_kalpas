@@ -43,7 +43,9 @@ class _FavNewsPageState extends State<FavNewsPage> {
                       itemBuilder: (ctx, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: NewsCard(newsData: state.articles[index]),
+                          child: NewsCard(
+                              isFromFavsPage: true,
+                              newsData: state.articles[index]),
                         );
                       })
                   : const Center(

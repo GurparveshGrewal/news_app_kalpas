@@ -11,8 +11,10 @@ import 'package:news_app_kalpas/features/home/views/bloc/home_bloc.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsDataEntity newsData;
+  final bool isFromFavsPage;
   const NewsCard({
     required this.newsData,
+    this.isFromFavsPage = false,
     super.key,
   });
 
@@ -22,7 +24,8 @@ class NewsCard extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Dismissible(
       key: UniqueKey(),
-      direction: DismissDirection.endToStart,
+      direction:
+          isFromFavsPage ? DismissDirection.none : DismissDirection.endToStart,
       dragStartBehavior: DragStartBehavior.start,
       confirmDismiss: (_) async {
         final confirmed = await showDialog(
