@@ -4,4 +4,6 @@ abstract class HomeRepository {
   Future<List<NewsDataEntity>> getNewsArticles();
 
   Future<List<NewsDataEntity>> getFavoriteArticles();
+
+  void addToFavoriteArticles(NewsDataEntity news);
 }

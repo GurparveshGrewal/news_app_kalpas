@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-var kColorScheme = ColorScheme.fromSeed(seedColor: Colors.white);
+var kColorScheme =
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 239, 239, 242));
 
 class AppThemeData {
   ThemeData themeData = ThemeData().copyWith(
+    scaffoldBackgroundColor: const Color.fromARGB(255, 239, 239, 242),
     colorScheme: kColorScheme,
     appBarTheme: const AppBarTheme().copyWith(
       backgroundColor: kColorScheme.onPrimaryContainer,
