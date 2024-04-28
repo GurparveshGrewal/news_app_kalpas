@@ -49,10 +49,8 @@ class _FavNewsPageState extends State<FavNewsPage> {
                         );
                       })
                   : const Center(
-                      child: Expanded(
-                        child: Text(
-                            'You don\'t have any favorite articles!\nTry adding by swiping news card'),
-                      ),
+                      child: Text(
+                          'You don\'t have any favorite articles!\nTry adding by swiping news card'),
                     ),
             );
           }

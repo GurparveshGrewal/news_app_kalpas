@@ -129,7 +129,7 @@ class NewsDetailsPage extends StatelessWidget {
                 ),
                 if (newsData.isFavorite)
                   Positioned(
-                      top: MediaQuery.of(context).size.height * 0.005,
+                      top: MediaQuery.of(context).size.height * 0.025,
                       right: 20,
                       child: const Icon(
                         CupertinoIcons.heart_fill,
